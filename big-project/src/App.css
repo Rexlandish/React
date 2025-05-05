@@ -1,0 +1,63 @@
+
+.widget-container {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+  box-sizing: border-box;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px black solid;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.bot-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: black;
+  padding: 1rem;
+  width: max-content;
+}
+
+.bot {
+  align-self: center;
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: white;
+}
+
+.bot h1, .bot h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.bot h1 {
+  font-weight: 600;
+}
+
+.bot h2 {
+  font-weight: 400;
+}
+
+.dynamic-bot-display {
+  border: 1px solid black;
+}
+
+.dynamic-bot {
+  margin: 1rem;
+  text-align: center;
+}
+
+.dynamic-bot p {
+  margin: 0;
+}
