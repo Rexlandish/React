@@ -1,0 +1,109 @@
+.robot-search-form-container {
+    background-color: rgb(223, 223, 223);
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
+.robot-search-form {
+    padding: 1rem;   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.robot-search-form .search-header {
+    width: 100%;
+    max-width: 30rem;
+}
+
+.robot-search-form .search-header button {
+    width: 100%;
+    margin: 0;
+
+    background: linear-gradient(to bottom, white, rgb(213, 213, 213));
+    padding: 0.5rem;
+    border: 1px solid grey;
+    color: black;
+    
+    font-family: monospace;
+    
+    transition: background-color 0.2s;
+}
+
+.robot-search-form .search-header button:active {
+    
+    background: linear-gradient(to top, white, rgb(213, 213, 213));
+}
+
+.robot-search-form input:focus,
+.robot-search-form select:focus {
+    outline:none;
+    
+    background-color: rgb(224, 255, 252);
+}
+
+.robot-search-form input {
+    border-radius: 0 1rem 0 0;
+    padding: 0.25rem;
+    font-family: monospace;
+}
+
+.robot-search-form input::placeholder {
+    font-family: monospace;
+}
+
+.robot-search-form select {
+    font-family: monospace;
+    border-radius: 0.5rem 0 0 0;
+    padding: 0.25rem;
+}
+
+.robot-search-form .top-row {
+    display: flex;
+    justify-content: center;
+}
+
+.robot-search-form .flex-grow {
+    flex-grow: 1;
+}
+
+.robot-result-columns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.robot-column {
+    border: 3px solid rgb(100, 100, 100, 0.5);
+    
+    border-radius: 0.5rem;
+    padding: 1rem;
+
+    text-align: center;
+}
+
+.robot {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.robot-type {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+}
+
+h1.robot-type {
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 700px) {
+    h1.robot-type {
+        font-size: 1rem;
+    }   
+
+    .robot-type {
+        gap: 0.5rem;
+    }
+}

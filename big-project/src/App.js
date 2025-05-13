@@ -1,5 +1,8 @@
 import './App.css';
 import React, { useState } from 'react';
+import OrderInfo from './Tickets/OrderInfo.js'
+import JobsList from "./Jobs/JobsList.js"
+import RobotSearchForm from './RobotSearchForm/RobotSearchForm.js';
 
 const JobCounter = () => {
 
@@ -18,6 +21,7 @@ const JobCounter = () => {
       color: "yellow",
       backgroundColor: "black",
       padding: "0.5rem",
+      margin: "0.25rem 1rem",
       width: "max-content",
       boxSizing: "border-box"
   }
@@ -96,14 +100,18 @@ const DynamicInput = () => {
     } 
   
 
+    let stringInput = "";
+
   return (
     <div className="form-input">
+      <Header/>
       <div className="input-area">
-        <input placeholder="Type here!" style={{marginBottom: "1rem"}} onChange={data => changeFormInput(data.target.value)}></input>
-        <button onClick={() => changeFormInput("")}>Reset</button>
+        <input value={formInput} placeholder="Type here!" style={{marginBottom: "1rem"}} onChange={data => changeFormInput(data.target.value)}></input>
+        <button  onClick={() => {stringInput = ""; changeFormInput("")}}>Reset</button>
       </div>
       <p style={pStyle}>{formInput}</p>
       <p style={pStyle}>{formInput.length}</p>
+      <Footer/>
     </div>
   )
 }
@@ -118,19 +126,29 @@ const BotTasks = () => {
       this.goal = goal;
       this.taskList = taskList;
 
-      this.currentTask = 0;
+      this.currentTask = -1;
       this.isActive = false;
 
     }
   }
 
-  const [botStates, setBotStates] = useState([]);
+  let [botStates, setBotStates] = useState(
+    
+    [
+      new Bot(1, "Find missing item", ["Looking...", "Getting...", "Returning...", "Returned!"]),
+      new Bot(2, "Bop it", ["Bopping it...", "Twisting it...", "Pulling it...", "High Score!"]),
+      new Bot(3, "Think", ["Pondering...", "Considering...", "Questioning...", "Aristotl'd!"])
+    ]
+
+
+  );
 
   // Create a state variable to hold the current task the bot is executing.
 
 
   async function startTask(obj, bot) {
 
+    bot.currentTask = 0;
     if (bot.isActive)
     {
       console.error(`Task ${bot.goal} is already active!`);
@@ -144,24 +162,36 @@ const BotTasks = () => {
       
       // Update task states, turn them into jsx, then display them.
       
-      setBotStates(getJSXBotStates())
+      bot.currentTask++;
+      
 
       const task = bot.taskList[i];
       console.log(task);
-      bot.currentTask++;
+      console.log([...botStates]);
+      
+      
+      setBotStates([...botStates])
+      
+      
       await new Promise((res) => setTimeout(res, 500 + Math.random() * 1500)) // Random delay between 500 and 1500
-
-
+      
+      if (bot.currentTask == bot.taskList.length)
+      {
+        break;
+      }
     }
+
+    bot.isActive = false;
     
     console.log("Done");
     obj.target.disabled = false;
   }
 
   function getJSXBotStates() {
+
     return (
       <div className="bot-container">
-          {allBots.map(bot => 
+          {botStates.map(bot => 
             <div key={bot.key} className="bot">
               <h1><b>Bot {bot.key}</b><br/>{bot.goal}</h1>
               <button onClick={obj => startTask(obj, bot)} style={{marginBottom: "1rem"}}>Begin</button>
@@ -172,91 +202,88 @@ const BotTasks = () => {
     )
   }
 
-  let allBots = [
-    new Bot(1, "Find missing item", ["Looking...", "Getting...", "Returning..."]),
-    new Bot(2, "Bop it", ["Bopping it...", "Twisting it...", "Pulling it..."]),
-    new Bot(3, "Think", ["Pondering...", "Considering...", "Questioning..."])
-  ]
-
   
   return (
     getJSXBotStates()
   )
 }
 
-
-const DynamicBotManager = () => {
-
-  class Bot {
-    constructor(id, task, isActive) {
-      this.id = id.toUpperCase();
-      this.task = task;
-      this.isActive = isActive
-    }
+export class Job {
+  constructor(id, jobRole, isHiring) {
+      this.id = id === undefined ? "" : id.toUpperCase();
+      this.jobRole = jobRole;
+      this.isHiring = isHiring ?? false;
   }
+}
 
-  let [botList, setBotList] = useState([
-    new Bot("SMTH", "do something", true),
-    new Bot("DSE", "do something else", false)
-  ])
-
-  let [newBotId, setNewBotId] = useState("");
-  let [newBotTask, setNewBotTask] = useState("");
-  
-  // List is not being assigned? Can't print anything after the initial line
-  function handleRemove(id) {
-    console.log(`handle remove ${id}`);
-
-    let tempBotlist = botList;
-    
-    const indexToRemove = tempBotlist.findIndex((element) => 
-      element.id == id
-    );
-    
-    tempBotlist = tempBotlist.splice(indexToRemove, 1);
-    setBotList(
-      tempBotlist
-    );
-  }
-
-  function handleChangeNewId(e) {
-    console.log(`change new id ${e.target.value}`);
-    setNewBotId(e.target.value);
-  }
-
-  function handleChangeNewTask(e) {
-    console.log(`change new task ${e.target.value}`);
-    setNewBotTask(e.target.value);
-  }
-
-  function addNewBot()
-  {
-    setBotList([...botList, new Bot(newBotId, newBotTask)])
-  }
-
-  return (
-    <div className="dynamic-bot-display">
-      {botList.map(bot => (
-        <div key={bot.id} className="dynamic-bot">
-          <p><b>Bot {bot.id}</b>: {bot.task}</p>
+const DynamicJobManager = () => {
 
 
-          <p style = {{
-            color: bot.isActive ? "green" : "red"
-          }}>
-            {bot.isActive ? "ENABLED" : "DISABLED"}
-          </p>
-          <button onClick={() => handleRemove(bot.id)}>Remove</button>
-        
+
+
+    let [jobList, setJobList] = useState([
+        new Job("SMTH", "do something", true),
+        new Job("DSE", "do something else", false)
+    ])
+
+
+    return (
+        <div className="dynamic-bot-display">
+          <h1>Active Jobs</h1>
+          <JobsList jobList={jobList} setJobList={setJobList}/>
         </div>
-      ))}
+    )
+}
 
-      {/* Add Bot Buttons */}
-      <input type="text" onChange={(e) => handleChangeNewId(e)} placeholder='Enter new bot id here...'/>
-      <input type="text" onChange={(e) => handleChangeNewTask(e)} placeholder='Enter new bot task here...'/>
-      <button onClick={() => addNewBot()}>Add Bot</button>
+const StatusBoard = () => {
+  return (
+    <div className="status-board">
+      <OrderInfo type="completed" icon="fa-check">
+        <p>
+          046,
+          047,
+          050,
+          056
+        </p>
+      </OrderInfo>
+      <OrderInfo type="in-progress" icon="fa-clock">
+        <p>
+          048,
+          049,
+          052,
+          055
+        </p>
+      </OrderInfo>
+      <OrderInfo type="failed" icon="fa-xmark">
+        <p>
+          050,
+          051,
+          053,
+          054
+        </p>
+      </OrderInfo>
     </div>
-  );
+
+  )
+}
+
+
+const Header = () => {
+  return (
+    <div className="header">
+      <i className="fa-solid fa-arrow-up"></i>
+      <h1>HEADER</h1>
+    </div>
+  )
+}
+
+const Footer = () => {
+  return (
+    <div className="footer">
+      <i className="fa-solid fa-arrow-down"></i>
+      <h1>FOOTER</h1>
+    </div>
+  )
 }
 
 const App = () => {
@@ -264,8 +291,10 @@ const App = () => {
     <div className="widget-container">
       <JobCounter/>
       <DynamicInput/>
-      {/*<BotTasks/>*/}
-      <DynamicBotManager/>
+      <BotTasks/>
+      <DynamicJobManager/>
+      <StatusBoard/>
+      <RobotSearchForm/>
     </div>    
   )
 }

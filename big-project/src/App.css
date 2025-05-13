@@ -1,3 +1,6 @@
+h1, h2, h3, p {
+  margin: 0;
+}
 
 .widget-container {
   margin: 0;
@@ -5,6 +8,11 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
   box-sizing: border-box;
+}
+
+.widget-container > * {
+  position: relative;
+  overflow: hidden;
 }
 
 .form-input {
@@ -19,13 +27,14 @@
 
 .bot-container {
   display: flex;
+  width: 100%;
+  box-sizing: border-box;
   justify-content: center;
   align-content: center;
   flex-direction: column;
   gap: 1rem;
   background-color: black;
   padding: 1rem;
-  width: max-content;
 }
 
 .bot {
@@ -49,15 +58,102 @@
   font-weight: 400;
 }
 
-.dynamic-bot-display {
+.dynamic-job-display {
   border: 1px solid black;
 }
 
-.dynamic-bot {
+.dynamic-job {
   margin: 1rem;
   text-align: center;
 }
 
-.dynamic-bot p {
+.dynamic-job p {
   margin: 0;
+}
+
+.job-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  overflow: scroll;
+  height: 10rem;
+  margin: auto;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.job {
+  text-align: center;
+}
+
+.header {
+  padding: 1rem;
+  background-color: purple;
+  box-shadow: 0 0 10px purple ;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.footer {
+  padding: 1rem;
+  background-color: orange;
+  box-shadow: 0 0 10px orange ;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header h1, .footer h1 {
+  font-size: 1.5rem;
+}
+
+.header i, .footer i {
+  font-size: 1.5rem;
+}
+
+.status-board {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-evenly;
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+
+  gap: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+
+}
+
+.order {
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  border: 5px solid rgba(0,0,0, 0.1);
+}
+
+.order p {
+  text-align: center;
+}
+
+.span-3 {
+  grid-column: span 3;
 }
