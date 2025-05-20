@@ -1,0 +1,107 @@
+body{
+  background-color: #aaaaaa;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#header {
+    text-align: center;
+    margin: 3rem auto;
+}
+
+#header img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
+    background-color: transparent;
+}
+
+#header h1 {
+    font-size: 1.5rem;
+}
+
+#user-input {
+  padding: 1rem;
+  max-width: 30rem;
+  margin: 2rem auto;
+  border-radius: 4px;
+  background-color: #505050;
+
+  display: flex;
+  flex-direction: column;
+  
+  gap: 1rem;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.input-group h2 {
+  font-weight: 200;
+  font-size: 1rem;
+  color: white;
+}
+
+.input-group input {
+  width: 10rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+#user-input button {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  background: grey;
+  color: white;
+  border-radius: 10px;
+
+
+  height: 30px;
+  width: 200px;
+
+}
+
+#user-input button:hover {
+  background: #aaa;
+  
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: right;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #ffffff62;
+}
+
+.center{
+  display: block;
+  margin:10px auto;
+}
+
+
+thead {
+  font-size: 1.2rem;
+}
+
+thead td {
+    text-align: center;
+    font-weight: 800;
+}
