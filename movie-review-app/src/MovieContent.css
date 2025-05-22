@@ -1,0 +1,46 @@
+.movie-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    height: 3rem;
+    width: 80vw;
+    margin: 0 auto;
+}
+
+
+
+.movie {
+    display: flex;
+    height: 20rem;
+    
+}
+
+.movie img {
+    z-index: -2;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie .movie-info {
+    background-color: rgba(211, 211, 211, 0.231);
+    padding: 1rem;
+    
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.movie .movie-info h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.movie .movie-info h1 span{
+    color: rgb(255, 221, 0);
+}
+
+.movie .movie-info p {
+    flex-grow: 1;
+    overflow-y: auto;
+    color: rgb(184, 184, 184);
+}
